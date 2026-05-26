@@ -455,17 +455,18 @@
 
     <!-- ⚠️ Notice de configuration -->
     <div class="config-notice" id="configNotice">
-      Votre élevage vous fait-il perdre de l’argent sans que vous sachiez pourquoi ? 
-      Entre dépenses mal suivies, traitements oubliés et performances floues, de nombreuses 
-      fermes au Bénin n’atteignent pas leur plein potentiel. Dans un marché pourtant en forte 
-      demande (volaille, porc, bœuf, chèvre, poisson), une gestion basée sur des notes éparses 
-      ou la mémoire entraîne pertes invisibles, décisions risquées et rentabilité incertaine. 
+      <!-- Vous perdez de l’argent dans votre élevage sans savoir exactement où ?
+      Difficulté à suivre les dépenses, les traitements, ou les performances de vos animaux ? Au Bénin, la demande en
+      produits d’élevage (volaille, porc, bœuf, chèvre, poisson) ne cesse d’augmenter. Pourtant, beaucoup de fermes
+      peinent à atteindre leur plein potentiel, faute d’un suivi structuré et fiable. Aujourd’hui, la gestion d’une
+      ferme repose souvent sur des notes dispersées, des estimations approximatives, ou simplement la mémoire. Résultat
+      : des pertes invisibles, des décisions difficiles et une rentabilité incertaine.  -->
       Et si vous pouviez :
       <ol style="padding-left:18px; color:#0c1dd7;">
-        <li>• Connaître précisément votre coût de production,</li>
-        <li>• Identifier rapidement les lots les moins performants,</li>
-        <li>• Suivre chaque dépense, traitement et vente en temps réel,</li>
-        <li>• Prendre de meilleures décisions pour améliorer votre rentabilité ?</li>
+        <li> Connaître précisément votre coût de production,</li>
+        <li> Identifier rapidement les lots les moins performants,</li>
+        <li> Suivre chaque dépense, traitement et vente en temps réel,</li>
+        <li> Prendre de meilleures décisions pour améliorer votre rentabilité ?</li>
       </ol>
       C’est exactement ce que propose Agrodi! Agrodi centralise toute la gestion de votre ferme : animaux,
       alimentation, soins, productions et finances — le tout dans un seul outil. Gagnez en clarté, en organisation et en
@@ -718,17 +719,16 @@
 
       fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        mode: 'no-cors'
       })
-        .then(function (r) { return r.json(); })
-        .then(function (res) {
-          if (res.status === 'ok') { showSuccess(data.nom); }
-          else { showError(btn); }
+        .then(() => {
+          showSuccess(data.nom);
         })
-        .catch(function () { showError(btn); });
+        .catch(err => {
+          console.error(err);
+          showError(btn);
+        });
     }
 
     function showSuccess(nom) {
