@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription — Webinaire Agrodi · 14 juin 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --green-dark: #173404;
+      --green-mid: #27500A;
+      --green-main: #3B6D11;
+      --green-light: #639922;
+      --green-pale: #C0DD97;
+      --green-faint: #EAF3DE;
+      --amber: #EF9F27;
+      --white: #FAFAF8;
+      --text: #1a1a18;
+      --text-muted: #5a5a55;
+      --border: #d8d8d0;
+      --radius: 10px;
+      --radius-lg: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--green-dark);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* Hero banner */
+    .hero {
+      background: var(--green-dark);
+      padding: 48px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 153, 34, 0.18) 0%, transparent 70%);
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 153, 34, 0.25);
+      border: 0.5px solid rgba(99, 153, 34, 0.5);
+      color: var(--green-pale);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hero-logo-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+
+    .hero-logo-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      color: var(--green-faint);
+      letter-spacing: 0.01em;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 5vw, 32px);
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 em {
+      color: var(--green-pale);
+      font-style: normal;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--green-pale);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 24px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .hero-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 0.5px solid rgba(255, 255, 255, 0.15);
+      color: var(--green-pale);
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    /* Form container */
+    .form-container {
+      background: var(--white);
+      border-radius: 24px 24px 0 0;
+      padding: 40px 24px 60px;
+      max-width: 620px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .form-progress {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+
+    .form-progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+
+    .form-progress-dot.active {
+      background: var(--green-light);
+    }
+
+    .form-progress-dot.done {
+      background: var(--green-main);
+    }
+
+    .form-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--green-faint);
+      color: var(--green-main);
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .field label .req {
+      color: var(--green-light);
+    }
+
+    .field label .opt {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--green-light);
+      box-shadow: 0 0 0 3px rgba(99, 153, 34, 0.12);
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .field-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .checkgrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: #f9f9f6;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .check-item:has(input:checked) {
+      background: var(--green-faint);
+      border-color: var(--green-light);
+    }
+
+    .check-item input {
+      accent-color: var(--green-main);
+      flex-shrink: 0;
+    }
+
+    /* Navigation buttons */
+    .form-nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .btn-back {
+      flex: 0 0 auto;
+      padding: 12px 20px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .btn-back:hover {
+      border-color: var(--text-muted);
+    }
+
+    .btn-next {
+      flex: 1;
+      padding: 13px;
+      background: var(--green-main);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-next:hover {
+      background: var(--green-mid);
+    }
+
+    /* Success screen */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--green-faint);
+      color: var(--green-main);
+      font-size: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-screen h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .success-screen p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    /* Error message */
+    .error-msg {
+      display: none;
+      background: #fff0f0;
+      border: 1px solid #fcc;
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #c00;
+      margin-top: 12px;
+    }
+
+    /* Config notice */
+    .config-notice {
+      background: #fffbea;
+      border: 1px solid #f0d060;
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #7a5f00;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .config-notice strong {
+      color: #5a4200;
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px 24px;
+      font-size: 12px;
+      color: rgba(192, 221, 151, 0.6);
+      background: var(--green-dark);
+    }
+
+    footer a {
+      color: var(--green-pale);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">🎙️ WEBINAIRE DE PRÉLANCEMENT</div>
+    <div class="hero-logo">
+      <div class="hero-logo-icon">🌱</div>
+      <div class="hero-logo-name">Agrodi</div>
+    </div>
+    <h1>Transformez la gestion<br>de votre <em>élevage</em>.</h1>
+    <p class="hero-sub">Rejoignez le webinaire de prélancement et découvrez comment Agrodi centralise toute votre ferme
+      dans un seul outil.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">📅 Samedi 14 juin 2026</span>
+      <span class="hero-pill">🕙 15h00 · Cotonou</span>
+      <span class="hero-pill">✅ Gratuit · En ligne</span>
+      <span class="hero-pill">⚠️ Places limitées</span>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-container">
+
+    <!-- ⚠️ Notice de configuration -->
+    <div class="config-notice" id="configNotice">
+      <!-- <strong> -->
+      Vous perdez de l’argent dans votre élevage sans savoir exactement où ?
+      Difficulté à suivre les dépenses, les traitements, ou les performances de vos animaux ? Au Bénin, la demande en
+      produits d’élevage (volaille, porc, bœuf, chèvre, poisson) ne cesse d’augmenter. Pourtant, beaucoup de fermes
+      peinent à atteindre leur plein potentiel, faute d’un suivi structuré et fiable. Aujourd’hui, la gestion d’une
+      ferme repose souvent sur des notes dispersées, des estimations approximatives, ou simplement la mémoire. Résultat
+      : des pertes invisibles, des décisions difficiles et une rentabilité incertaine. Et si vous pouviez :
+      <ol style="padding-left:18px; color:#0c1dd7;">
+        <li>• Connaître précisément votre coût de production,</li>
+        <li>• Identifier rapidement les lots les moins performants,</li>
+        <li>• Suivre chaque dépense, traitement et vente en temps réel,</li>
+        <li>• Prendre de meilleures décisions pour améliorer votre rentabilité ?</li>
+      </ol>
+      C’est exactement ce que propose Agrodi Inc. Agrodi Inc. (https://agrodi.fr) est une application simple et
+      puissante conçue pour les éleveurs africains. Elle centralise toute la gestion de votre ferme : animaux,
+      alimentation, soins, productions et finances — le tout dans un seul outil. Gagnez en clarté, en organisation et en
+      performance. Participez au webinaire de prélancement et découvrez comment transformer la gestion de votre élevage
+      avec Agrodi Inc.
+
+    </div>
+
+    <div class="form-progress" id="progress">
+      <div class="form-progress-dot active" id="dot-0"></div>
+      <div class="form-progress-dot" id="dot-1"></div>
+      <div class="form-progress-dot" id="dot-2"></div>
+      <div class="form-progress-dot" id="dot-3"></div>
+    </div>
+
+    <form id="inscriptionForm" novalidate>
+
+      <!-- Section 1 : Identité -->
+      <div class="form-section active" id="section-0">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <div class="section-title">Vos informations</div>
+          <div class="section-desc">Pour vous envoyer le lien de connexion avant le webinaire.</div>
+        </div>
+        <div class="field">
+          <label>Nom complet <span class="req">*</span></label>
+          <input type="text" name="nom" placeholder="Ex : Koffi Adjovi" required>
+        </div>
+        <div class="field">
+          <label>Numéro WhatsApp <span class="req">*</span></label>
+          <input type="tel" name="whatsapp" placeholder="Ex : +229 97 00 00 00" required>
+          <div class="field-hint">Le lien de connexion vous sera envoyé ici 48h avant le webinaire.</div>
+        </div>
+        <div class="field">
+          <label>Adresse email <span class="opt">(optionnel)</span></label>
+          <input type="email" name="email" placeholder="Ex : koffi@gmail.com">
+        </div>
+        <div class="form-nav">
+          <button type="button" class="btn-next" onclick="nextSection(0)">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- Section 2 : Localisation -->
+      <div class="form-section" id="section-1">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <div class="section-title">Votre localisation</div>
+          <div class="section-desc">Pour mieux comprendre la répartition géographique des participants.</div>
+        </div>
+        <div class="field">
+          <label>Département / Ville <span class="req">*</span></label>
+          <select name="localisation" required>
+            <option value="">Sélectionnez...</option>
+            <option>Cotonou / Littoral</option>
+            <option>Porto-Novo / Ouémé</option>
+            <option>Abomey-Calavi / Atlantique</option>
+            <option>Parakou / Borgou</option>
+            <option>Bohicon / Zou</option>
+            <option>Lokossa / Mono</option>
+            <option>Natitingou / Atacora</option>
+            <option>Kandi / Alibori</option>
+            <option>Autre département du Bénin</option>
+            <option>Hors Bénin (Afrique de l'Ouest)</option>
+            <option>Autre pays</option>
+          </select>
+        </div>
+        <div class="form-nav">
+          <button type="button" class="btn-back" onclick="prevSection(1)">← Retour</button>
+          <button type="button" class="btn-next" onclick="nextSection(1)">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- Section 3 : Activité -->
+      <div class="form-section" id="section-2">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <div class="section-title">Votre activité d'élevage</div>
+          <div class="section-desc">Pour adapter le contenu du webinaire à vos besoins réels.</div>
+        </div>
+        <div class="field">
+          <label>Votre rôle <span class="req">*</span></label>
+          <select name="role" required>
+            <option value="">Sélectionnez...</option>
+            <option>Promoteur / Propriétaire de ferme</option>
+            <option>Gérant / Fermier salarié</option>
+            <option>Technicien vétérinaire</option>
+            <option>Investisseur agricole</option>
+            <option>Étudiant en agriculture / élevage</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Filières pratiquées <span class="req">*</span></label>
+          <div class="checkgrid">
+            <label class="check-item"><input type="checkbox" name="filieres" value="Aviculture"> 🐔 Aviculture</label>
+            <label class="check-item"><input type="checkbox" name="filieres" value="Porcin"> 🐷 Porcin</label>
+            <label class="check-item"><input type="checkbox" name="filieres" value="Caprin"> 🐐 Caprin</label>
+            <label class="check-item"><input type="checkbox" name="filieres" value="Bovin"> 🐄 Bovin</label>
+            <label class="check-item"><input type="checkbox" name="filieres" value="Pisciculture"> 🐟
+              Pisciculture</label>
+            <label class="check-item"><input type="checkbox" name="filieres" value="Autre"> ➕ Autre</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Taille approximative de votre ferme <span class="opt">(optionnel)</span></label>
+          <select name="taille">
+            <option value="">Sélectionnez...</option>
+            <option>Petite (moins de 100 animaux)</option>
+            <option>Moyenne (100 à 500 animaux)</option>
+            <option>Grande (500 à 2 000 animaux)</option>
+            <option>Très grande (plus de 2 000 animaux)</option>
+            <option>Je démarre / pas encore de ferme</option>
+          </select>
+        </div>
+        <div class="form-nav">
+          <button type="button" class="btn-back" onclick="prevSection(2)">← Retour</button>
+          <button type="button" class="btn-next" onclick="nextSection(2)">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- Section 4 : Attentes -->
+      <div class="form-section" id="section-3">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <div class="section-title">Vos attentes</div>
+          <div class="section-desc">Dernière étape — aidez-nous à préparer un webinaire qui vous correspond.</div>
+        </div>
+        <div class="field">
+          <label>Quel est votre principal défi dans la gestion de votre ferme ? <span
+              class="opt">(optionnel)</span></label>
+          <textarea name="defi"
+            placeholder="Ex : Je n'arrive pas à calculer mon coût de production exactement..."></textarea>
+        </div>
+        <div class="field">
+          <label>Comment avez-vous entendu parler d'Agrodi ? <span class="opt">(optionnel)</span></label>
+          <select name="source">
+            <option value="">Sélectionnez...</option>
+            <option>WhatsApp (groupe ou contact)</option>
+            <option>Facebook</option>
+            <option>Bouche à oreille</option>
+            <option>SMS / appel</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="error-msg" id="errorMsg">Une erreur s'est produite. Vérifiez votre connexion et réessayez.</div>
+        <div class="form-nav">
+          <button type="button" class="btn-back" onclick="prevSection(3)">← Retour</button>
+          <button type="button" class="btn-next" id="submitBtn" onclick="submitForm()">Confirmer mon inscription
+            ✓</button>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- Succès -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✅</div>
+      <h2>Inscription confirmée !</h2>
+      <p>Merci <strong id="successName"></strong> ! Vous recevrez le lien de connexion sur WhatsApp <strong>48h avant le
+          webinaire</strong>.<br><br>Rendez-vous le <strong>samedi 14 juin 2026 à 10h00</strong> pour découvrir
+        Agrodi.<br><br>En attendant, visitez <a href="https://agrodi.fr" target="_blank">https://agrodi.fr</a> ✨</p>
+    </div>
+
+  </div>
+
+  <!-- Instructions de configuration -->
+  <!-- <div
+    style="background:#111; color:#aaa; padding:32px 24px; font-size:13px; line-height:1.8; max-width:620px; margin:0 auto;">
+    <strong style="color:#fff; display:block; margin-bottom:12px;">📌 Instructions — Connexion à Google Sheets</strong>
+    <ol style="padding-left:18px; color:#bbb;">
+      <li>Ouvrez <a href="https://sheets.google.com" target="_blank" style="color:#97C459;">Google Sheets</a> et créez
+        un nouveau tableau nommé <em>Inscriptions Agrodi</em></li>
+      <li>En ligne 1, ajoutez ces colonnes : <code
+          style="background:#222; padding:1px 5px; border-radius:3px;">Date · Nom · WhatsApp · Email · Localisation · Rôle · Filières · Taille · Défi · Source</code>
+      </li>
+      <li>Dans le menu <strong style="color:#fff;">Extensions → Apps Script</strong>, collez le script ci-dessous</li>
+      <li>Déployez en tant que <strong style="color:#fff;">Application Web</strong> (accès : Tout le monde)</li>
+      <li>Copiez l'URL générée et remplacez <code
+          style="background:#222; padding:1px 5px; border-radius:3px;">VOTRE_URL_APPS_SCRIPT</code> dans le JavaScript
+        de ce fichier</li>
+    </ol>
+    <pre
+      style="background:#1a1a1a; border:1px solid #333; border-radius:8px; padding:16px; margin-top:16px; overflow-x:auto; color:#C0DD97; font-size:12px;">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(),
+    data.nom, data.whatsapp, data.email,
+    data.localisation, data.role, data.filieres,
+    data.taille, data.defi, data.source
+  ]);
+  return ContentService
+    .createTextOutput(JSON.stringify({status:'ok'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</pre>
+  </div> -->
+
+  <footer>
+    <a href="https://agrodi.fr" target="_blank">agrodi.fr</a> · Plateforme de gestion d'élevage pour les fermiers
+    africains
+  </footer>
+
+  <script>
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLlOozQkFo7RklmMaEIWTThoHDAIvTrY_ThfQkIFRVH1nJZ761wbgAwPXmBiXXb3k/exec';
+
+    let currentSection = 0;
+    const totalSections = 4;
+
+    function updateProgress(section) {
+      for (let i = 0; i < totalSections; i++) {
+        const dot = document.getElementById('dot-' + i);
+        if (i < section) { dot.className = 'form-progress-dot done'; }
+        else if (i === section) { dot.className = 'form-progress-dot active'; }
+        else { dot.className = 'form-progress-dot'; }
+      }
+    }
+
+    function nextSection(from) {
+      if (!validateSection(from)) return;
+      document.getElementById('section-' + from).classList.remove('active');
+      currentSection = from + 1;
+      document.getElementById('section-' + currentSection).classList.add('active');
+      updateProgress(currentSection);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevSection(from) {
+      document.getElementById('section-' + from).classList.remove('active');
+      currentSection = from - 1;
+      document.getElementById('section-' + currentSection).classList.add('active');
+      updateProgress(currentSection);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function validateSection(section) {
+      const sec = document.getElementById('section-' + section);
+      const required = sec.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(function (el) {
+        el.style.borderColor = '';
+        if (!el.value.trim()) {
+          el.style.borderColor = '#e24b4a';
+          el.focus();
+          valid = false;
+        }
+      });
+      if (section === 2) {
+        const checked = sec.querySelectorAll('input[name="filieres"]:checked');
+        if (checked.length === 0) {
+          alert('Veuillez sélectionner au moins une filière.');
+          valid = false;
+        }
+      }
+      return valid;
+    }
+
+    function collectData() {
+      const f = document.getElementById('inscriptionForm');
+      const filieres = Array.from(f.querySelectorAll('input[name="filieres"]:checked'))
+        .map(function (cb) { return cb.value; }).join(', ');
+      return {
+        nom: f.nom.value,
+        whatsapp: f.whatsapp.value,
+        email: f.email.value,
+        localisation: f.localisation.value,
+        role: f.role.value,
+        filieres: filieres,
+        taille: f.taille.value,
+        defi: f.defi.value,
+        source: f.source.value
+      };
+    }
+
+    function submitForm() {
+      if (!validateSection(3)) return;
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
+      document.getElementById('errorMsg').style.display = 'none';
+
+      const data = collectData();
+
+      if (APPS_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzLlOozQkFo7RklmMaEIWTThoHDAIvTrY_ThfQkIFRVH1nJZ761wbgAwPXmBiXXb3k/exec') {
+        // Mode démo — afficher le succès sans envoyer
+        showSuccess(data.nom);
+        return;
+      }
+
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (res.status === 'ok') { showSuccess(data.nom); }
+          else { showError(btn); }
+        })
+        .catch(function () { showError(btn); });
+    }
+
+    function showSuccess(nom) {
+      document.getElementById('inscriptionForm').style.display = 'none';
+      document.getElementById('progress').style.display = 'none';
+      document.getElementById('configNotice').style.display = 'none';
+      document.getElementById('successName').textContent = nom.split(' ')[0];
+      document.getElementById('successScreen').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showError(btn) {
+      document.getElementById('errorMsg').style.display = 'block';
+      btn.textContent = 'Confirmer mon inscription ✓';
+      btn.disabled = false;
+    }
+  </script>
+</body>
+
+</html>
