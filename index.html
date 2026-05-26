@@ -455,7 +455,6 @@
 
     <!-- ⚠️ Notice de configuration -->
     <div class="config-notice" id="configNotice">
-      <!-- <strong> -->
       Vous perdez de l’argent dans votre élevage sans savoir exactement où ?
       Difficulté à suivre les dépenses, les traitements, ou les performances de vos animaux ? Au Bénin, la demande en
       produits d’élevage (volaille, porc, bœuf, chèvre, poisson) ne cesse d’augmenter. Pourtant, beaucoup de fermes
@@ -625,43 +624,12 @@
       <div class="success-icon">✅</div>
       <h2>Inscription confirmée !</h2>
       <p>Merci <strong id="successName"></strong> ! Vous recevrez le lien de connexion sur WhatsApp <strong>48h avant le
-          webinaire</strong>.<br><br>Rendez-vous le <strong>samedi 14 juin 2026 à 10h00</strong> pour découvrir
-        Agrodi.<br><br>En attendant, visitez <a href="https://agrodi.fr" target="_blank">https://agrodi.fr</a> ✨</p>
+          webinaire</strong>.<br><br>Rendez-vous le <strong>Dimanche 14 juin 2026 à 15h00</strong> pour découvrir
+        Agrodi Inc.<br><br>En attendant, visitez <a href="https://agrodi.fr" target="_blank">https://agrodi.fr</a> ✨</p>
     </div>
 
   </div>
 
-  <!-- Instructions de configuration -->
-  <!-- <div
-    style="background:#111; color:#aaa; padding:32px 24px; font-size:13px; line-height:1.8; max-width:620px; margin:0 auto;">
-    <strong style="color:#fff; display:block; margin-bottom:12px;">📌 Instructions — Connexion à Google Sheets</strong>
-    <ol style="padding-left:18px; color:#bbb;">
-      <li>Ouvrez <a href="https://sheets.google.com" target="_blank" style="color:#97C459;">Google Sheets</a> et créez
-        un nouveau tableau nommé <em>Inscriptions Agrodi</em></li>
-      <li>En ligne 1, ajoutez ces colonnes : <code
-          style="background:#222; padding:1px 5px; border-radius:3px;">Date · Nom · WhatsApp · Email · Localisation · Rôle · Filières · Taille · Défi · Source</code>
-      </li>
-      <li>Dans le menu <strong style="color:#fff;">Extensions → Apps Script</strong>, collez le script ci-dessous</li>
-      <li>Déployez en tant que <strong style="color:#fff;">Application Web</strong> (accès : Tout le monde)</li>
-      <li>Copiez l'URL générée et remplacez <code
-          style="background:#222; padding:1px 5px; border-radius:3px;">VOTRE_URL_APPS_SCRIPT</code> dans le JavaScript
-        de ce fichier</li>
-    </ol>
-    <pre
-      style="background:#1a1a1a; border:1px solid #333; border-radius:8px; padding:16px; margin-top:16px; overflow-x:auto; color:#C0DD97; font-size:12px;">function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([
-    new Date(),
-    data.nom, data.whatsapp, data.email,
-    data.localisation, data.role, data.filieres,
-    data.taille, data.defi, data.source
-  ]);
-  return ContentService
-    .createTextOutput(JSON.stringify({status:'ok'}))
-    .setMimeType(ContentService.MimeType.JSON);
-}</pre>
-  </div> -->
 
   <footer>
     <a href="https://agrodi.fr" target="_blank">agrodi.fr</a> · Plateforme de gestion d'élevage pour les fermiers
@@ -669,7 +637,7 @@
   </footer>
 
   <script>
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLlOozQkFo7RklmMaEIWTThoHDAIvTrY_ThfQkIFRVH1nJZ761wbgAwPXmBiXXb3k/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyH95VgVIBa0hP8Nt0l-ssaRzOK1FFYBSyxpIvLIZ1XzRSlXQfO4qBfgip38VrZq9l_/exec';
 
     let currentSection = 0;
     const totalSections = 4;
@@ -748,14 +716,11 @@
 
       const data = collectData();
 
-      if (APPS_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzLlOozQkFo7RklmMaEIWTThoHDAIvTrY_ThfQkIFRVH1nJZ761wbgAwPXmBiXXb3k/exec') {
-        // Mode démo — afficher le succès sans envoyer
-        showSuccess(data.nom);
-        return;
-      }
-
       fetch(APPS_SCRIPT_URL, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(data)
       })
         .then(function (r) { return r.json(); })
