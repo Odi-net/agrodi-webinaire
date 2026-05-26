@@ -697,7 +697,7 @@
         .map(function (cb) { return cb.value; }).join(', ');
       return {
         nom: f.nom.value,
-        whatsapp: f.whatsapp.value,
+        whatsapp: "'" + f.whatsapp.value,
         email: f.email.value,
         localisation: f.localisation.value,
         role: f.role.value,
